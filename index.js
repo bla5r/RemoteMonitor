@@ -2,9 +2,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var colors = require('colors');
 
+/*
+ * @Author: bla5r
+ * @Date: 02-15-2017
+ */
+
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+/*
+ * Desc: Set up default route
+ */
 
 app.post('/', function (req, res) {
 	printHeader(req);
@@ -13,29 +22,58 @@ app.post('/', function (req, res) {
 	res.send('');
 })
 
+/*
+ * Desc: Listen on port 8081
+ */
+
 var server = app.listen(8081, function () {
 	console.log(colors.dim("[INIT]") + " " + colors.bold("Server is running..."));
 })
+
+/*
+ * Desc: Pad number to two digits
+ */
 
 function format(n) {
     return (n > 9 ? "" + n : "0" + n);
 }
 
+/*
+ * Desc: Format date
+ */
+
 function getDate(date) {
 	return (format(date.getMonth()) + "-" + format(date.getDate()) + "-" + format(date.getFullYear()));
 }
+
+/*
+ * Desc: Format time
+ */
 
 function getTime(date) {
 	return (format(date.getHours()) + ":" + format(date.getMinutes()) + ":" + format(date.getSeconds()));
 }
 
+/*
+ * Desc: Print delimiter between sections
+ */
+
 function printSecDelimiter() {
 	console.log(colors.dim("____________________________________"));
 }
 
+/*
+ * Desc: Print delimiter at the end of log block
+ */
+
 function printEndDelimiter() {
-	console.log(colors.bold("____________________________________\n\n"));
+	console.log(colors.bold("____________________________________"));
+	console.log("\n");
 }
+
+/*
+ * Desc: Print header (date - time - request number - execution id)
+ */
 
 function printHeader(req) {
 	var date = new Date(req.body.ts);
@@ -48,6 +86,10 @@ function printHeader(req) {
 	printSecDelimiter();
 }
 
+/*
+ * Desc: Print all variables
+ */
+
 function printVars(req) {
 	console.log(colors.bold.red("+ Variable(s):"));
 	if (req.body.vars.length <= 0)
@@ -57,6 +99,10 @@ function printVars(req) {
 	}
 	printSecDelimiter();
 }
+
+/*
+ * Desc: Print all stack traces
+ */
 
 function printStackTrace(req) {
 	console.log(colors.bold.red("+ Stack trace(s):"));
