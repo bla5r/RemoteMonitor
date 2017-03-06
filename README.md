@@ -1,6 +1,6 @@
 # RemoteMonitor
 
-Monitor to get logs from Android app using RemoteLogger (https://github.com/bla5r/RemoteLogger).
+Monitor to get logs from Android app using [RemoteLogger](https://github.com/bla5r/RemoteLogger "RemoteLogger").
 
 # Requirements
 
